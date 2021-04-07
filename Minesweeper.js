@@ -16,13 +16,28 @@ let codeTable = {
     commonCell : 0,
 };
 
+
+let timer = document.querySelector('#timer');
+let seconds = 0; 
+
+function printTimer() {
+    seconds ++;
+    timer.textContent = `${seconds < 10 ? `0${seconds}` : seconds}초`};
+
+
+
 document.querySelector('#exec').addEventListener('click', function() {
-    //내부 먼저 초기화
+    //내부 먼저 초기화    
+    printTimer();
+    let time = setInterval(printTimer, 1000);
     tbody.innerHTML = '';
-    document.querySelector('#result').textContent = '';
+    document.querySelector('.comment').textContent = '';
+    document.querySelector('.endTime').textContent = '';
     dataset = [];
     open = 0;
     exitFlag = false;
+    seconds =0;
+
     let hor = parseInt(document.querySelector('#hor').value);
     let ver = parseInt(document.querySelector('#ver').value);
     let mine = parseInt(document.querySelector('#mine').value);
@@ -33,8 +48,7 @@ document.querySelector('#exec').addEventListener('click', function() {
     .map(function (el, index) {
         return index;
     });
-    let shuffle = [];
-    
+    let shuffle = [];    
 
     while (mines.length > hor * ver - mine) {
         let newMine = mines.splice(Math.floor(Math.random() * mines.length), 1)[0];
@@ -98,7 +112,8 @@ document.querySelector('#exec').addEventListener('click', function() {
                 if (exitFlag) {
                     return;
                 }
-                
+                startTime = new Date();
+
                 let parentTr = e.currentTarget.parentNode;
                 let parentTbody = e.currentTarget.parentNode.parentNode;
                 let cell = Array.prototype.indexOf.call(parentTr.children, e.currentTarget);
@@ -112,9 +127,13 @@ document.querySelector('#exec').addEventListener('click', function() {
                 open += 1;
                 
                 if (dataset[line][cell] === codeTable.mine) { // 지뢰 클릭했을 때
-                    e.currentTarget.textContent = '펑!';
-                    document.querySelector('#result').textContent = '실패ㅠㅠ';
+                    let endTime = seconds;
+                    clearInterval(time);
+                    e.currentTarget.textContent = '💣';
+                    document.querySelector('.comment').textContent = '실패ㅠㅠ😱';
+                    document.querySelector('.endTime').textContent = `걸린 시간 : ${seconds}초`;
                     exitFlag = true;
+                    seconds = 0;
                 } else { // 지뢰가 아닌경우 주변 지뢰 개수
                     let around = [
                         dataset[line][cell - 1], dataset[line][cell + 1],
@@ -171,8 +190,13 @@ document.querySelector('#exec').addEventListener('click', function() {
                 }
 
                 if( open === hor * ver - mine) {
+                    let endTime = seconds;
+                    clearInterval(time);
                     exitFlag = true;
-                    document.querySelector('#result').textContent = '승리~!!';
+                    document.querySelector('.comment').textContent = '승리~!!🎉';
+                    document.querySelector('.endTime').textContent = `걸린시간 : ${seconds}초`;
+                    
+                    seconds = 0;
                 }
             });
             tr.appendChild(td);

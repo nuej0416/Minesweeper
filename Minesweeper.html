@@ -3,21 +3,45 @@
     <meta charset="UTF-8">
     <title>지뢰찾기</title>
     <style>
+        #wrapper {
+            width : 100%;
+        }
+
+        .title>h1 {
+            text-align: center;
+        }
+
+        .setting {
+            margin-left : 30%;
+        }
         table {
             border-collapse: collapse;
+            margin-left : 36%;
+            user-select: none;
         }
 
         td {
             border : 1px solid #bbb;
             text-align: center;
             line-height: 20px;
-            width : 20px;
-            height : 20px;
-            background : #222;
+            width : 30px;
+            height : 30px;
+            background : rgb(197, 197, 197);
+            color : rgb(197, 197, 197);
         }
-
+        .time_wrap {
+            background: rgba(185, 206, 245, 0.74);
+            color : #222;
+            width : 5%;
+            margin-left:30%;
+        }
+        #timer {
+            text-align: center;
+        }
         td.opened {
             background : #fff;
+            color : #222;
+            font-weight: bold;
         }
 
         td.flag {
@@ -27,25 +51,39 @@
         td.question {
             background: orange;
         }
+        #result {
+            font-weight: bold;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <input type="number" id="hor" placeholder="가로" value = "10">
-    <input type="number" id="ver" placeholder="세로" value = "10">
-    <input type="number" id="mine" placeholder="지뢰수" value = "20">
-    <button id="exec">실행</button>
-    <table id="table">
-        <thead>
-            <tr>
-                <td>
-                    <span id = "timer"> 0 </span> 초
-                </td>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-    <div id="result"></div>
-
+    <div id="wrapper">
+        <div class="title">
+            <h1>💣지뢰 찾기💣</h1>
+        </div>
+        <div class="setting">
+            <input type="number" id="hor" placeholder="가로" value = "10">
+            <input type="number" id="ver" placeholder="세로" value = "10">
+            <input type="number" id="mine" placeholder="지뢰수" value = "20">
+            <button id="exec">실행</button>
+        </div>        
+        <div class="time_wrap">
+            <p id ="timer">0초</p>
+        </div>
+        <table id="table">
+            <thead>
+                <tr>
+                    
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div id="result">
+            <h3 class="comment"></h3>
+            <p class="endTime"></p>
+        </div>
+    </div>
     <script src="Minesweeper.js"></script>
 </body>
 </html>
