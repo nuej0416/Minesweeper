@@ -5,7 +5,7 @@
   </p>
   
 ## ✨OVERVIEW
-#### Javascript를 학습하며 만든 지뢰찾기 게임
+#### Javascript 클로저, 렉시컬 스코프, 스코프 체인, 데이터 딕셔너리의 전반적인 이해를 위헤 만든 지뢰찾기 게임
 ## ⚙TECHNOLOGY
 #### HTML, CSS, JS
 ## 🖼RESULT
